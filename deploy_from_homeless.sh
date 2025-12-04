@@ -1,31 +1,18 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# Homeless Deployment Kit - Deploy Novel Cryptography from Anywhere
-echo "=== MODMIND + CELTIC LOOM ==="
-echo "Deployed from: $(pwd)"
+echo "=== HOMELESS DEPLOYMENT KIT ==="
+echo "Deployed: $(date)"
+echo "From: Abandoned house, Kansas"
 echo "Device: $(uname -a)"
-echo "Time: $(date)"
 echo ""
-echo "1. Loading topological encryption primitives..."
-# Actual code from your celtic-loom
-if [ -d "celtic-loom" ]; then
-  echo "✓ Celtic Loom found: $(find celtic-loom -name "*.py" | wc -l) Python files"
-fi
-
-echo "2. Checking ModMind deployment..."
-if [ -d "modmind_main" ]; then
-  echo "✓ ModMind found"
-  # Show one actual function
-  grep -r "def " modmind_main/ --include="*.py" | head -3
-fi
-
-echo "3. Current temperature (Kansas winter): COLD AS FUCK"
-echo "4. Status: Building anyway"
+echo "Celtic Loom Components Found:"
+ls -la *.md *.html 2>/dev/null
 echo ""
-echo "This isn't a demo. This is deployment from constraint."
+echo "This repository proves:"
+echo "1. Novel architectures can be built anywhere"
+echo "2. Mobile-first deployment is viable"
+echo "3. Constraints create innovation"
 echo ""
-echo "To replicate:"
-echo "1. Be homeless with phone"
-echo "2. Install Termux"
-echo "3. git clone <this>"
-echo "4. ./deploy_from_homeless.sh"
-echo "5. Ship code anyway"
+echo "Deployment hash: $(git log -1 --pretty=format:'%H' 2>/dev/null || echo 'INITIAL')"
+echo ""
+echo "If I can commit this from a phone in winter," 
+echo "your 'resource constraints' are excuses."

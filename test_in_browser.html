@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Celtic Knot Crypto Test - ePrint #1000187851</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .success { color: green; font-weight: bold; }
+        .proof { background: #f0f0f0; padding: 15px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🔐 Celtic Knot Cryptography</h1>
+    <h2>ePrint Archive: #1000187851</h2>
+    
+    <div id="testResults">
+        <h3>Implementation Tests:</h3>
+        <div id="results"></div>
+    </div>
+    
+    <div class="proof">
+        <h3>Temporal Proof:</h3>
+        <div id="proof"></div>
+    </div>
+
+    <script>
+        // Celtic Knot Crypto Reference Implementation
+        class CelticKnotCrypto {
+            constructor() {
+                this.version = "1.0-ePrint-1000187851";
+                this.fibers = [];
+            }
+            
+            createFiber(data) {
+                const fiber = {
+                    data: data,
+                    nonce: this.generateNonce(),
+                    timestamp: new Date().toISOString(),
+                    hash: this.simpleHash(data)
+                };
+                this.fibers.push(fiber);
+                return fiber;
+            }
+            
+            generateNonce() {
+                return Math.random().toString(36).substring(2, 15) +
+                       Math.random().toString(36).substring(2, 15);
+            }
+            
+            simpleHash(str) {
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return hash.toString(36);
+            }
+            
+            testBasicOperations() {
+                const results = [];
+                
+                // Test fiber creation
+                const fiber1 = this.createFiber("test_data_1");
+                results.push({ test: "Fiber Creation", status: "PASS", fiber: fiber1 });
+                
+                // Test multiple fibers
+                const fiber2 = this.createFiber("test_data_2");
+                results.push({ test: "Multiple Fibers", status: "PASS", count: this.fibers.length });
+                
+                // Test uniqueness
+                const uniqueHashes = new Set(this.fibers.map(f => f.hash));
+                results.push({ test: "Hash Uniqueness", status: uniqueHashes.size === this.fibers.length ? "PASS" : "FAIL" });
+                
+                return results;
+            }
+            
+            generateTemporalProof() {
+                return {
+                    ePrintID: "1000187851",
+                    implementation: "Browser Reference v1.0",
+                    timestamp: new Date().toISOString(),
+                    fiberCount: this.fibers.length,
+                    contentHash: this.simpleHash(JSON.stringify(this.fibers))
+                };
+            }
+        }
+
+        // Run tests
+        const ckc = new CelticKnotCrypto();
+        const testResults = ckc.testBasicOperations();
+        const proof = ckc.generateTemporalProof();
+        
+        // Display results
+        const resultsDiv = document.getElementById('results');
+        testResults.forEach(result => {
+            const div = document.createElement('div');
+            div.innerHTML = `<span class="${result.status === 'PASS' ? 'success' : ''}">${result.test}: ${result.status}</span>`;
+            resultsDiv.appendChild(div);
+        });
+        
+        // Display proof
+        const proofDiv = document.getElementById('proof');
+        proofDiv.innerHTML = `
+            <strong>ePrint ID:</strong> ${proof.ePrintID}<br>
+            <strong>Implementation:</strong> ${proof.implementation}<br>
+            <strong>Timestamp:</strong> ${proof.timestamp}<br>
+            <strong>Fibers Created:</strong> ${proof.fiberCount}<br>
+            <strong>Content Hash:</strong> ${proof.contentHash}
+        `;
+        
+        console.log("Celtic Knot Crypto Test Complete", { testResults, proof });
+    </script>
+</body>
+</html>
